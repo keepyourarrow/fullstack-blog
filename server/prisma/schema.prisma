@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// migrate with this command
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// one to many relationship with category
+// many to one relationship with blog
+// one to many relationship with user
+model Blog {
+  id    String @id @default(cuid())
+  title String @unique
+
+  //defaults
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  likes      Int?     @default(0)
+  dislikes   Int?     @default(0)
+  views      Int?     @default(0)
+  ips        String[] // for unique views
+
+  //required
+  slug          String @unique
+  image         String
+  content       String
+  short_preview String
+
+  //optional
+  preview  String?
+  tags     String[]
+  comments Json[]
+
+  // not sure
+  disabled Boolean @default(false)
+  edited   Boolean @default(false)
+
+  //defaults
+  Comment Comment[]
+
+  //relational fields
+  category_id Int?
+  category    Category? @relation(fields: [category_id], references: [id])
+  user_id     Int?
+  user        User?     @relation(fields: [user_id], references: [id])
+
+  @@map(name: "blogs")
+}
+
+//one to many relationship with blog and user
+model Comment {
+  id       String @id @default(cuid())
+  body     String
+  likes    Int?   @default(0)
+  dislikes Int?   @default(0)
+
+  //relational fields
+  blog    Blog   @relation(fields: [blog_id], references: [id])
+  blog_id String
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id Int
+
+
+  @@map(name: "comments")
+}
+
+// TODO add CommentLiks and BlogLikes
+
+//many to one relationship with blog
+model Category {
+  id    Int      @id @default(autoincrement())
+  name  String   @unique
+  views Int?     @default(0)
+  ips   String[] // for unique views
+
+  //relational fields
+  blogs Blog[]
+
+  @@map(name: "category")
+}
+
+model User {
+  id                   Int      @id @default(autoincrement())
+  email                String   @unique
+  password             String
+  userName             String?  @unique
+  verified             Boolean  @default(false)
+  disabled             Boolean  @default(false)
+  role                 Role     @default(USER)
+  avatar               String?
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+  refresh_token        String?
+  password_reset_count Int?     @default(0)
+
+
+
+  //relational fields
+  blogs               Blog[]
+  comments            Comment[]
+  verifificationToken VerifificationToken?
+
+
+  @@map(name: "users")
+}
+
+model VerifificationToken {
+  token      String   @unique
+  created_at DateTime @default(now())
+  expires_in Int      @default(25) // 25 min
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    Int
+
+  @@id([user_id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
