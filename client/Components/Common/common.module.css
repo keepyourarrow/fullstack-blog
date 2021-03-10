@@ -1,0 +1,89 @@
+/*------------------------------------*\
+  #display-blog
+\*------------------------------------*/
+/**
+ * Comment
+ */
+.authorContainer,
+.readmore {
+    margin-top: 1.5rem;
+}
+.blogTitle,
+.blogImageContainer {
+    margin-top: 1rem;
+}
+/* dangerousSetHTML */
+.blogContent a {
+    color: var(--color-pink-3);
+}
+.blogContent p {
+    line-height: 1.9rem;
+}
+.blogContent * {
+    word-wrap: break-word;
+}
+
+/* end dangerousSETHTML */
+
+.blogSection {
+    max-width: 748px;
+    padding-right: 1rem;
+}
+.blog {
+    margin-bottom: 3rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--color-pink-3);
+}
+
+.blogCategory {
+    font-size: 13px;
+}
+.blogTitle {
+    text-transform: capitalize;
+    font-size: 2.2rem;
+}
+.authorContainer {
+    font-size: 15px;
+    margin-bottom: 1rem;
+}
+.blogAuthor {
+    margin-left: 0.25rem;
+}
+.blogImageExists {
+    width: auto;
+    height: auto;
+}
+.blogNoImage {
+    width: 100%;
+    max-width: 748px;
+    height: 400px;
+}
+
+.blogReadmore {
+    letter-spacing: -0.025em;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.footer {
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+.footerSocialLinks span:not(:first-child) {
+    margin-left: 0.5rem;
+}
+.footerCommentsName {
+    font-size: 16px;
+    font-family: bodoni serif;
+}
+.footerComments {
+    margin-left: 0.25rem;
+    font-size: 24px;
+    font-family: "Prata", serif;
+}
+
+/*------------------------------------*\
+     #END-display-blog
+   \*------------------------------------*/

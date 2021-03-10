@@ -1,0 +1,238 @@
+/*------------------------------------*\
+  #Header
+\*------------------------------------*/
+.sidebar {
+    max-width: 514px;
+    width: 100%;
+    background: #f2d184;
+    color: #866118;
+    font-size: 20px;
+}
+.sidebar__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.sidebar__link {
+    padding-left: 4px;
+    font-size: 36px;
+    font-family: "East Sea Dokdo", cursive;
+}
+.sidebar__header {
+    padding: 64px 64px 30px;
+}
+.sidebar__title {
+    padding-right: 30px;
+    font-size: 36px;
+    font-family: Helvetica, sans-serif;
+}
+.sidebar__artwork {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+.sidebar__artworkImage {
+    max-height: 70%;
+    background: url("../../styles/assets/images/headerImg.jpg") no-repeat;
+    background-color: #f2d184;
+    flex-grow: 1;
+}
+/*------------------------------------*\
+    #End-Header
+  \*------------------------------------*/
+
+/*------------------------------------*\
+    #Login-Signup
+  \*------------------------------------*/
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
+.main__nav {
+    padding: 30px 30px 0;
+    text-align: right;
+}
+.main__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.main__titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main__titleContainer div {
+    width: 100%;
+}
+.main__title {
+    font: 24px Helvetica, sans-serif;
+    max-width: 416px;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.main__authForm {
+    padding: 10px 0;
+    width: 50%;
+    max-width: 500px;
+}
+.fieldGroup {
+    display: flex;
+    margin-bottom: 10px;
+}
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.field input {
+    background: rgba(238, 238, 238, 0.5);
+}
+
+.label {
+    margin: 9px 0 9px;
+    font: bold 15px Helvetica, sans-serif;
+}
+
+.submitField {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.submitBtn {
+    width: 100%;
+    max-width: 200px;
+}
+
+@media screen and (max-width: 1480px) {
+    .main__authForm {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main__authForm {
+        width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .fieldGroup {
+        display: block;
+    }
+    .submitField {
+        flex-direction: column-reverse;
+    }
+    .submitBtn {
+        margin-top: 1.5rem;
+    }
+}
+
+/* password strength checker */
+.passwordStrength__bar,
+.passwordStrength__name {
+    transition: all 0.7s ease;
+}
+.passwordStrength {
+    flex: 1;
+    width: 100%;
+    max-width: 242px;
+    margin-right: 9px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    background: #eee;
+    border-radius: 4px;
+}
+.passwordStrength__value {
+    display: flex;
+    justify-content: space-between;
+}
+.passwordStrength__name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+.passwordStrength__bar {
+    margin-top: 0.25rem;
+    height: 7px;
+    width: 100%;
+    background: rgb(161, 161, 161);
+}
+.passwordStrength__bar div {
+    z-index: 50;
+    height: 100%;
+    max-width: 100%;
+}
+.passwordStrength__suggestion {
+    margin-top: 0.5rem;
+    font-size: 14px;
+}
+
+/*------------------------------------*\
+  #End-Login-Signup
+  \*------------------------------------*/
+
+/*------------------------------------*\
+  #Confirm
+  \*------------------------------------*/
+
+.confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 1.5rem;
+}
+.confirmation__container {
+    background: #eee;
+    border-radius: 5px;
+    padding: 0.25rem 1rem;
+    max-width: 530px;
+    width: 100%;
+    font-size: 14px;
+}
+.confirmation__container p {
+    line-height: 1.5;
+}
+.confirmation__status {
+    margin: 1em 0;
+    background-color: #d3fac3;
+    border-radius: 2px;
+    padding: 0.5rem 1rem;
+    color: var(--color-black-2);
+}
+
+.confirmation__inputForm {
+    width: 85%;
+    display: flex;
+    align-items: center;
+}
+.confirmation__input {
+    width: 100%;
+    margin-right: 0.25rem;
+}
+.confirmation__button {
+    width: 120px;
+}
+/*------------------------------------*\
+    #End-Confirm
+    \*------------------------------------*/

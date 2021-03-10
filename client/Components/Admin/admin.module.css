@@ -1,0 +1,31 @@
+.title {
+    color: var(--color-black-1);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #fff;
+    padding: 2rem 0.75rem;
+    border-bottom: 2px solid var(--color-pink-5);
+}
+
+/* main */
+
+.main {
+    background: var(--color-gray-1);
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+}
+.mainContent {
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* form */
+
+.formContainer {
+    background: #fff;
+    border-radius: 45px;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem 2rem;
+}

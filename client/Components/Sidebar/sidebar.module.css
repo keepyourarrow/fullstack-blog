@@ -1,0 +1,111 @@
+/*------------------------------------*\
+  #sidebar
+\*------------------------------------*/
+/**
+ * Comment
+ */
+.container {
+  max-width: 300px;
+  margin-top: 1rem;
+}
+.topBorder {
+  border-top: 1px solid var(--color-pink-3);
+}
+
+.aside {
+  margin-bottom: 1.75rem;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.asideLink:hover .titlePrimary {
+  color: var(--color-pink-2);
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+}
+.body {
+  padding: 1.5rem;
+}
+
+.titlePrimary {
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  font: 20px Prata serif;
+}
+
+.titleSecondary {
+  font-family: Prata serif;
+  font-weight: bold;
+}
+
+/*------------------------------------*\
+    #contact
+\*------------------------------------*/
+
+.contactContainer {
+  padding: 1.75rem 0;
+}
+/*------------------------------------*\
+    #END-contact
+\*------------------------------------*/
+
+/*------------------------------------*\
+    #disclosure
+\*------------------------------------*/
+.disclosure {
+  line-height: 1.5rem;
+  text-align: left;
+  font-size: 15px;
+}
+
+/*------------------------------------*\
+      #END-disclosure
+\*------------------------------------*/
+
+/*------------------------------------*\
+    #popular
+\*------------------------------------*/
+
+.popularLinks {
+  text-align: left;
+  margin: 0;
+  margin-left: 10px;
+  padding: 1.25rem 0;
+  counter-reset: item;
+  list-style: none;
+}
+.popularLink {
+  counter-increment: item;
+  font-size: 14px;
+  padding: 0.75rem 1.25rem;
+  line-height: 1.25rem;
+  margin-bottom: 5px;
+
+  position: relative;
+}
+.popularLink::before {
+  content: counter(item);
+  padding-right: 10px;
+  font-size: 40px;
+  font-family: Prata, serif;
+  color: #b7b7b7;
+  width: 53px;
+  position: absolute;
+  top: 25%;
+  left: -14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*------------------------------------*\
+    #END-popular
+\*------------------------------------*/
+
+/*------------------------------------*\
+    #END-sidebar
+\*------------------------------------*/
