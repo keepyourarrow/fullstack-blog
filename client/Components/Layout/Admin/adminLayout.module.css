@@ -4,6 +4,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    z-index: 3000;
 }
 .nav__logo {
     color: white;
@@ -18,8 +20,26 @@
 /* body */
 .body {
     display: flex;
-    height: calc(100vh - 68px);
+    height: calc(100vh - 77px);
     overflow: hidden;
+}
+
+/* search */
+.searchContainer {
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 0.5rem;
+    font-size: 18px;
+}
+.searchContainer:hover {
+    color: var(--color-white-1-hover);
+}
+.searchIcon {
+    font-size: 19px;
+    padding-right: 0.35rem;
 }
 
 /* sidebar */
@@ -27,11 +47,24 @@
     background: var(--color-black-3);
     width: 100%;
     height: auto;
-    max-width: 350px;
+    width: 22%;
+    max-width: 305px;
     color: #fff;
     font-size: 18px;
     padding: 1.5rem 0;
+    transform: translateX(0);
+    transition: all 0.2s ease-in;
 }
+/*  for mobile */
+.sidebar.active {
+    transform: translateX(0);
+    transition: all 0.2s ease-out;
+}
+.mobileSidebar_blackBackground {
+    display: none;
+}
+/* end for mobile */
+
 .sidebar__link {
     display: flex;
     padding: 1.5rem;
@@ -51,12 +84,59 @@
 @media screen and (max-width: 992px) {
     .nav {
         padding: 1rem 1rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
     .mobileNav {
         display: block;
         margin-right: 1.5rem;
     }
     .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 3000;
+        margin-top: 80px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .mobileSidebar_blackBackground {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 2000;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: opacity 0.1s ease-in-out;
+    }
+    .body {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .sidebar {
         max-width: 280px;
+    }
+}
+
+@media screen and (max-width: 1240px) {
+    .sidebar {
+        max-width: 240px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sidebar {
+        max-width: 100%;
+    }
+    .nav__logo {
+        display: none;
     }
 }

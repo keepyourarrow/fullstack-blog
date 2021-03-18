@@ -46,6 +46,7 @@ const getAllBlogs = async (req, res) => {
 const getBlogByTitle = async (req, res) => {
     const title = req.params.title;
 
+    console.log(title, "(getBogByTitle)");
     let blog = await prisma.blog.findFirst({
         where: { slug: title },
         include: includeCategoryAndUsers,
@@ -219,7 +220,7 @@ const create_blog = async (req, res) => {
         const blog = await prisma.blog.create({
             data: {
                 ...req.body,
-                slug: slugify(req.body.title),
+                slug: slugify(req.body.title.toLowerCase()),
                 image,
                 user: { connect: { id: user_id } },
                 category: {

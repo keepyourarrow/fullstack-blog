@@ -31,13 +31,12 @@ export const useNormalFetch = ({
     const post = async (body) => {
         setLoading(true);
         try {
-            console.log(fetchFunc);
             const { data } = await fetchFunc(url, type, body);
-            if (data?.access_token) {
+            if (url !== "login" && data?.access_token) {
                 cookie.set("access_token", data.access_token, { expires: 365 });
                 delete data.access_token;
             }
-            console.log(data);
+            console.log(data, "useNORMALFETCH");
             setRes(data);
             setLoading(false);
             callback?.(data);

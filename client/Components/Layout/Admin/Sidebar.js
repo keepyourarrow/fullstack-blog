@@ -8,13 +8,13 @@ import { useRouter } from "next/router";
 const defaultData = [
     { id: 1, name: "Dashboard", link: "/", active: true },
     { id: 2, name: "Create blog", link: "/create-blog", active: false },
-    { id: 3, name: "Charts", link: "/", active: false },
-    { id: 4, name: "Table and Panels", link: "/", active: false },
+    { id: 3, name: "Blogs", link: "/blogs", active: false },
+    { id: 4, name: "Categories", link: "/categories", active: false },
     { id: 5, name: "Forms", link: "/", active: false },
     { id: 6, name: "Empty page", link: "/", active: false },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ openSidebar, setOpenSidebar }) => {
     const [links, setLinks] = useState(defaultData);
     const router = useRouter();
 
@@ -24,9 +24,10 @@ const Sidebar = () => {
 
         if (path[2]) {
             let found = defaultData.find((item) => item.link.includes(path[2]));
-            handleActive(found.id);
+            handleActive(found?.id);
         }
-    }, []);
+        console.log("router");
+    }, [router]);
 
     const handleActive = (id) => {
         const tempLinks = [...links];
@@ -41,10 +42,11 @@ const Sidebar = () => {
             }
         }
 
-        setLinks(tempLinks);
+        setOpenSidebar(false);
+        setLinks([...tempLinks]);
     };
     return (
-        <div className={styles.sidebar}>
+        <div className={`${styles.sidebar} ${openSidebar ? styles.active : ""}`}>
             {links.map((link) => {
                 let classNames = styles.sidebar__link;
                 classNames += link.active ? ` ${styles.sidebar__link__active}` : "";

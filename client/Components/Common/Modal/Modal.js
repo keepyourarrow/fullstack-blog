@@ -2,32 +2,63 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import styles from "./modal.module.css";
+import FillButton from "../Ui/FillButton";
 
-export const Modal = ({ setOpenModal, maxWidth = "28 rem", exitButton = true, children }) => {
+const modalVariant = {
+    initial: {
+        bottom: "-10px",
+        transition: { type: "spring", damping: 200, stifness: 50 },
+    },
+    animate: { bottom: 0 },
+    exit: { bottom: "-10px" },
+};
+
+const exitButtonVariant = {
+    initial: {
+        opacity: 0,
+        top: "-100%",
+    },
+    animate: { opacity: 1, top: "50px" },
+    exit: { opacity: 0, top: "-100%" },
+};
+export const Modal = ({ setOpenModal, maxWidth = "28rem", children }) => {
     return (
-        <div
-            className={`flex-center fixed inset-0 ${styles.modalContainer}`}
-            onClick={() => (!exitButton ? setOpenModal(false) : "")}
-        >
-            <motion.div
-                className={`relative ${styles.modal}`}
-                style={{ maxWidth }}
-                key="modal"
-                transition={{ duration: 0.1, ease: "easeInOut" }}
-                initial={{ opacity: 0, scale: 0.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.1 }}
+        <div>
+            <div
+                className={`flex-center fixed inset-0 ${styles.modalContainer}`}
+                onClick={() => setOpenModal(false)}
             >
-                {children}
-                {exitButton && (
-                    <button
-                        type="button"
-                        className="absolute top-0 right-0 -mx-8 w-6 h-6 focus:outline-none hover:text-gray-800"
-                        onClick={() => setOpenModal(false)}
+                <div style={{ maxWidth }}>
+                    <motion.div
+                        // layout
+                        className={`relative ${styles.modal}`}
+                        key="modal"
+                        {...modalVariant}
+                        // variants={modalVariant}
                     >
-                        x
-                    </button>
-                )}
+                        {children}
+                    </motion.div>
+                </div>
+            </div>
+
+            <motion.div
+                // layout
+                className={styles.exitButton}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                // {...exitButtonVariant}
+                variants={exitButtonVariant}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+            >
+                <FillButton
+                    bgColor="rgba(0,0,0,0.8)"
+                    color="white"
+                    fillColor="pink-5"
+                    onClick={() => setOpenModal(false)}
+                >
+                    <button className="non-focusable">x</button>
+                </FillButton>
             </motion.div>
         </div>
     );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNormalFetch } from "../../hooks/useNormalFetch";
 import { useValidateImageURL } from "use-validate-image-url";
@@ -7,19 +7,27 @@ import Editor from "../Common/Editor";
 import DisplaySingleBlog from "../Common/DisplaySingleBlog";
 
 import styles from "./admin.module.css";
-import DefaultLayout from "../Layout/DefaultLayout";
+import { motion, AnimatePresence } from "framer-motion";
+import FillButton from "../Common/Ui/FillButton";
 import Notification from "../Common/Notification/Notification";
+import DefaultLayout from "../Layout/DefaultLayout";
 
+import Container from "./Template/Container";
 import { handleEscape } from "../../helpers/keyPresses";
+import { fadeVariant } from "../../helpers/framer-motion/variants";
 
-const CreateBlog = () => {
+const BlogForm = ({ title = "Create new blog", blog: existingBlog = {} }) => {
     const { user } = useAuth();
+    const scrollToDiv = useRef();
 
     //#region  state
-    const [blog, setBlog] = useState({});
+    const [blog, setBlog] = useState(existingBlog);
     const [body, setBody] = useState(null);
     const [errors, setErrors] = useState({});
+
+    // preview
     const [showPreview, setShowPreview] = useState(false);
+    const [closePreviewButton, setClosePreviewButton] = useState(false);
     //#endregion state
     const imageIsValid = useValidateImageURL(blog.image);
 
@@ -44,8 +52,6 @@ const CreateBlog = () => {
         let title = blog.title?.trim();
         let category = blog.category?.trim();
         let { content, image, short_preview } = blog;
-
-        console.log(content);
 
         let tempErrors = {};
 
@@ -103,6 +109,9 @@ const CreateBlog = () => {
 
         setErrors(tempErrors);
 
+        // scrollToTop;
+        scrollToDiv.current.scrollIntoView({ behavior: "smooth" });
+
         if (Object.keys(tempErrors).length > 0) {
             return;
         }
@@ -126,7 +135,7 @@ const CreateBlog = () => {
                             style={{ right: 30, top: -10 }}
                             onClick={() => setShowPreview(false)}
                         >
-                            x
+                            esc
                         </button>
                         <section
                             className="blog-section non-focusable"
@@ -153,9 +162,7 @@ const CreateBlog = () => {
         errors,
     };
     return (
-        <main className={`non-focusable ${styles.main}`}>
-            <div className={styles.title}>Create new blog</div>
-
+        <Container title={title} containerRef={scrollToDiv}>
             <div className={`container ${styles.mainContent}`}>
                 <div className={`${styles.formContainer}`}>
                     <form>
@@ -228,32 +235,50 @@ const CreateBlog = () => {
                             </div>
                         </div>
 
-                        <input type="submit" onClick={handleSubmit} />
+                        <input className="btn btn-main mt-1" type="submit" onClick={handleSubmit} />
                     </form>
 
-                    {Object.keys(blog).length > 0 && (
-                        <button
-                            onClick={() => setShowPreview(true)}
-                            title="Preview what you have so far"
-                        >
-                            Preview
-                        </button>
+                    {inputsNotEmpty(blog) && (
+                        <div className="fixed" style={{ top: "170px", right: "85px" }}>
+                            <AnimatePresence exitBeforeEnter>
+                                {!closePreviewButton && (
+                                    <motion.div
+                                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                                        key="preview"
+                                        {...fadeVariant("scale", 0.5, 1)}
+                                    >
+                                        <FillButton
+                                            bgColor="#007fff"
+                                            fillColor="green"
+                                            width="6.6rem"
+                                            height="3.4rem"
+                                        >
+                                            <button
+                                                onClick={() => setShowPreview(true)}
+                                                title="Preview what you have so far"
+                                            >
+                                                Preview
+                                            </button>
+                                        </FillButton>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                            <button
+                                className="fixed secondary-btn"
+                                style={{ top: "185px", right: "15px" }}
+                                onClick={() => setClosePreviewButton(!closePreviewButton)}
+                            >
+                                {!closePreviewButton ? "hide" : "show"}
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
-
-            {/* <AnimatePresence>
-                {showPreview && (
-                    <Modal setOpenModal={setShowPreview} maxWidth="1250px" exitButton={false}>
-                        <DisplaySingleBlog blog={blog} userName={user.userName} />
-                    </Modal>
-                )}
-            </AnimatePresence> */}
-        </main>
+        </Container>
     );
 };
 
-export default CreateBlog;
+export default BlogForm;
 
 // custom component
 
@@ -286,11 +311,15 @@ const Input = ({ type, name, value, blog, setBlog, errors, placeholder, suggesti
 
 /* TODO
 
-1. Style buttons in a unique way.
-2. Make tooltip question mark prettier
-3. Think of a good explanation for Short preview, include that it should ideally be less than 90 characters
+1. Style buttons in a unique way. ------- Done
+2. Make tooltip question mark prettier --------- Done
+3. Think of a good explanation for Short preview, include that it should ideally be less than 90 characters ------- Done
 4. work on DisplayBlogsAsGrid
-5. work on /search?query component + maybe add highlighted search
+5. work on /search?query component + maybe add highlighted search ------- Done
 6. remove ... from DisplaySingleBlog.js
 
 */
+
+const inputsNotEmpty = (blog) => {
+    return Object.values(blog).some((x) => x !== null && x !== "");
+};

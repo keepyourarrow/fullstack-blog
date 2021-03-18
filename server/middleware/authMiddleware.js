@@ -68,6 +68,7 @@ const requireAuth = async (req, res, next) => {
 
     try {
         const { userId } = jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET);
+        console.log("Correct access token");
         req.body.user_id = userId;
         next();
     } catch (err) {

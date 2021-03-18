@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,6 +11,7 @@ import Alert from "../../Common/Alert/Alert";
 
 const Layout = ({ children }) => {
     const { notification, setNotification } = useAuth();
+    const [openSidebar, setOpenSidebar] = useState(false);
 
     useEffect(() => {
         if (notification) {
@@ -21,30 +22,16 @@ const Layout = ({ children }) => {
     }, [notification]);
     return (
         <div>
-            <Nav />
+            <Nav openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
 
             <AnimatePresence>{notification && <Alert />}</AnimatePresence>
             <div className={styles.body}>
-                <Sidebar />
-                <motion.button
-                    animate={{
-                        scale: [1, 2, 2, 1, 1],
-                        rotate: [0, 0, 360, 360, 0],
-                        borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-                    }}
-                    transition={{
-                        duration: 2,
-                        ease: "easeInOut",
-                        times: [0, 0.2, 0.5, 0.8, 1],
-                        loop: Infinity,
-                        repeatDelay: 1,
-                    }}
-                    className="absolute"
-                    style={{ background: "#fff", padding: "1rem", left: "50%", top: "50%" }}
-                    onClick={() => setNotification(true)}
-                >
-                    dasd
-                </motion.button>
+                <div
+                    className={`${styles.mobileSidebar_blackBackground} ${
+                        openSidebar ? "d-block" : "d-none"
+                    } `}
+                ></div>
+                <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                 {children}
             </div>
         </div>

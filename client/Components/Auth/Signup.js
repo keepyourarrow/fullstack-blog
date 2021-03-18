@@ -7,7 +7,7 @@ import Confirm from "./Confirm";
 import { passwordStrengthChecker, strengthBar } from "./passwordValidator";
 import { useNormalFetch } from "../../hooks/useNormalFetch";
 
-import styles from "./auth.module.css";
+import styles from "../../styles/auth.module.css";
 
 const Signup = () => {
     const { handleSubmit, register, errors, watch, setValue } = useForm();

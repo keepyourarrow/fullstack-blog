@@ -4,10 +4,12 @@
 
 :root {
     --body-bg-white: rgb(251, 249, 244);
+    --color-white-1-hover: rgb(242 229 229);
     --color-black-1: #333;
     --color-black-2: #000;
     --color-black-3: #1a202c;
     --color-gray-1: #edf2f7;
+    --color-gray-2: rgba(100, 95, 95, 0.75);
     --color-indigo-1: #e1d5ea;
     --color-pink-1: #bb3d6e;
     --color-pink-2: #d03b39;
@@ -17,7 +19,10 @@
     --color-pink-6: #f57acf;
     --color-pink-7: #ea4c89;
     --color-green-1: #b5e3ae;
+    --color-green-2: #90ff99;
+    --color-blue-1: #007fff;
     --transition-1: all 0.45s cubic-bezier(0.4, 0, 0, 1);
+    --transition-main: all 0.2s ease-in-out;
 }
 
 /**
@@ -560,6 +565,32 @@ p {
 .non-focusable:focus {
     outline: none;
 }
+.d-block {
+    display: block;
+}
+.d-none {
+    display: none;
+}
+.z-1 {
+    position: relative;
+    z-index: 1;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+.ml-4 {
+    margin-left: 1rem;
+}
+.mr-4 {
+    margin-right: 1rem;
+}
+.mb-4 {
+    margin-bottom: 1rem;
+}
+.mt-1 {
+    margin-top: 0.25rem;
+}
 /*------------------------------------*\
   #links
 \*------------------------------------*/
@@ -653,18 +684,42 @@ p {
     outline: none;
 }
 
-.esc-btn {
+.esc-btn,
+.secondary-btn {
     font-size: 0;
     border-radius: 0.375rem;
     background-color: #f9fafb;
     border: 1px solid #d1d5db;
     padding: 0.125rem 0.375rem;
 }
+.secondary-btn {
+    color: var(--color-black-2);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
 .esc-btn::before {
     content: "esc";
     color: var(--color-black-2);
     font-size: 0.875rem;
     line-height: 1.25rem;
+}
+
+.delete-button {
+    margin-left: 1rem;
+    background-color: rgb(224, 75, 75);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+}
+.delete-button:hover {
+    background-color: rgb(238 73 73);
+}
+.delete-button:focus {
+    background-color: rgb(199 61 61);
+}
+.delete-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 /*------------------------------------*\
   #end-buttons

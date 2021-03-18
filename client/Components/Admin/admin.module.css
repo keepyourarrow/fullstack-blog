@@ -26,6 +26,50 @@
 .formContainer {
     background: #fff;
     border-radius: 45px;
+    margin-top: 2.8rem;
+    padding: 1rem 2rem 2.5rem;
+}
+
+/* table */
+
+.tableContainer {
     margin-top: 2rem;
-    padding: 1rem 1.5rem 2rem;
+    padding: 1rem 0.5rem;
+}
+
+.table__actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+}
+
+.table__pencil {
+    color: var(--color-pink-5);
+    font-size: 18px;
+}
+.table__pencil:hover {
+    color: var(--color-pink-3);
+}
+.table__trash {
+    color: red;
+    font-size: 18px;
+}
+.table__trash:hover {
+    color: rgb(241, 120, 120);
+}
+.tableHighlight {
+    background: var(--color-green-2) !important;
+}
+.tableHighlight:hover {
+}
+
+@media screen and (max-width: 992px) {
+    .main {
+        margin-top: 80px;
+    }
 }

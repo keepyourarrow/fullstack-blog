@@ -1,14 +1,172 @@
-.modalContainer {
-    background: rgba(255, 255, 255, 0.75);
-    z-index: 60;
+.modalContainer,
+.searchModalContainer {
+    z-index: 5000;
     height: 100%;
     width: 100%;
 }
+.modalContainer {
+    background: rgba(255, 255, 255, 0.75);
+}
+
 
 .modal {
-    box-shadow: 0px 1px 22px 0px rgba(0, 0, 0, 0.85);
-    border-radius: 0.125rem;
+    box-shadow: 0px 1px 12px 0px rgba(0, 0, 0, 0.85);
+    border-radius: 0.25rem;
     background: #fff;
     width: 100%;
-    padding: 1rem 1.5rem;
 }
+
+.exitButton {
+    position: absolute;
+    z-index:5200;
+    right: 50px;
+}
+
+/* delete modal */
+.deleteModal {
+    background:rgba(0, 0, 0, 0.75);
+    border-radius: 0.25rem;
+}
+.deleteModal__header {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 17px;
+    padding: 1rem;
+    line-height: 1.4;
+}
+.deleteModal__warning  {
+    border-radius:0.5rem;
+    padding:0.8rem;
+    color:white;
+    background-color:#c58f29;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.deleteModal__body {
+    margin-top:0.5rem;
+    padding:1rem;
+}
+.deleteModal__enterName {
+    color:rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.deleteModal__input {
+    margin-top:0.5rem;
+    width: 100%;
+    padding:0.75rem;
+    background:var(--color-gray-2);
+    color:white;
+}
+.deleteModal__input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(29, 133, 218, 0.5);
+}
+
+.deleteModal__footer {
+    background:var(--color-gray-2);
+    padding:1rem;
+    margin-top:0.75rem;
+    border-top:1px solid var(--color-gray-2);
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.deleteModal__footer div {
+    margin-left: auto;
+}
+
+
+/* buttons */
+.cancelButton {
+    color:white;
+}
+.cancelButton:hover {
+    text-decoration: underline;
+}
+.deleteButton {
+    margin-left:1rem;
+    background-color: rgb(224, 75, 75);
+    color:white;
+    padding:0.75rem;
+    border-radius: 0.25rem;
+}
+
+
+/* searchModal */
+.searchModalContainer {
+    background:rgba(0,0,0,.25);
+}
+.searchModalContainer .modal {
+    padding: 1rem 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom:1.5rem;
+}
+
+.searchInput {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.25rem 0 1rem;
+    border-bottom:1px solid #e5e7eb;
+    font-size: 17px;
+}
+.searchInput input:focus {
+    outline: none;
+}
+
+.searchIcon {
+    color: var(--color-pink-5);
+    font-size:25px;
+    margin-right:0.75rem;
+}
+
+.searchModal__resultsContainer {
+    padding: 1rem 0 0.5rem;
+}
+.results__title {
+    line-height: 1.5rem;
+    font-weight: 600;
+    color: #4b5563;
+    font-size: 17px;
+    margin-bottom:0.7rem;
+}
+
+.searchResults {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    transition: var(--transition-main);
+    cursor: pointer;
+    padding:0 0.75rem;
+    border-radius: 0.5rem;
+    background: #f9fafb;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+    margin-bottom:0.5rem;
+}
+.searchResults:hover {
+    background: var(--color-pink-5);
+    color:white !important;
+}
+.searchResults__iconFile {
+    margin-right:16px;
+}
+.searchResults__title {
+    line-height: 1.5rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 17px;
+    max-width: 24rem;
+}
+
+.searchResults__iconFile,
+.searchResults__iconLink {
+    font-size:22px;
+}
+
+/* end searchModal */

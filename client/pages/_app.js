@@ -32,16 +32,13 @@ function MyApp({ Component, pageProps }) {
     );
 
     useEffect(() => {
-        console.log(fetchedUser);
+        console.log(fetchedUser, "fetchedUser _app.js");
         if (fetchedUser) {
             setUser(fetchedUser.data);
-
         }
     }, [fetchedUser]);
 
-    useEffect(() => {
-
-    },[accessToken,refreshToken])
+    useEffect(() => {}, [accessToken, refreshToken]);
 
     const login = (token) => {
         // save the token from the login response in a cookie
@@ -65,6 +62,14 @@ function MyApp({ Component, pageProps }) {
         if (user) return user.role === "ADMIN";
 
         return false;
+    };
+
+    const checkAccessToken = (data) => {
+        if (data?.data?.access_token) {
+            cookie.set("access_token", data.access_token, { expires: 365 });
+            delete data.access_token;
+        }
+        return data;
     };
 
     let components = (
@@ -93,6 +98,7 @@ function MyApp({ Component, pageProps }) {
                 logout,
                 setUser,
                 isAdmin,
+                checkAccessToken,
                 hasPermission,
                 setHasPermission,
                 notification,
@@ -105,3 +111,13 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+// custom functions
+
+/*
+ the point of this function is to not cause an error
+"cannot replace of undefined" when it fetches
+*/
+const getToken = (accessToken) => {
+    return accessToken !== "undefined" ? jwt_decode(accessToken).userId : "";
+};

@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^2.16.0",
-    "bcrypt": "^5.0.0",
+    "@prisma/client": "^2.18.0",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "crypto-random-string": "^3.3.1",

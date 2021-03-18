@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { resendLink } from "../../api/auth";
 
 import { useForm } from "react-hook-form";
 
-import styles from "./auth.module.css";
+import styles from "../../styles/auth.module.css";
 
 import Loading from "../Common/Loading";
 import { useFetchWithParam } from "../../hooks/useFetchWithParam";

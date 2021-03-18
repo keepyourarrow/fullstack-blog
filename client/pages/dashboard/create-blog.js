@@ -2,7 +2,7 @@ import React from "react";
 import { withAdmin } from "../../hoc/withAdmin";
 import { useAuth } from "../../hooks/useAuth";
 
-import CreateBlog from "../../Components/Admin/CreateBlog";
+import BlogForm from "../../Components/Admin/BlogForm";
 
 // const CreateBlog = dynamic(() => import("../../Components/Admin/Content/CreateBlog").then(mod => mod.CreateBlog), {
 //     ssr: false,
@@ -16,7 +16,7 @@ const createBlogPage = () => {
         return <></>;
     }
 
-    return <CreateBlog />;
+    return <BlogForm />;
 };
 
 export default withAdmin(createBlogPage);

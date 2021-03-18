@@ -36,7 +36,7 @@ const getCategoryByName = async (req, res) => {
 
     removeUselessProperties(user);
 
-    console.log("request has been made");
+    console.log("request has been made(categoryController)");
     res.json(user);
 };
 

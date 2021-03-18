@@ -33,7 +33,7 @@ const getUserById = async (req, res) => {
 
     removeUselessProperties(user);
 
-    console.log("request has been made");
+    console.log("request has been made(userContoller)");
     res.json(user);
 };
 

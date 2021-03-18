@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import styles from "./auth.module.css";
+import styles from "../../styles/auth.module.css";
 
 const Template = ({ type, authError, form }) => {
     const isSignup = type === "signup";

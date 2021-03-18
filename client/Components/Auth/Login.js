@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 import Template from "./Template";
 
-import styles from "./auth.module.css";
+import styles from "../../styles/auth.module.css";
 
 const Login = () => {
     const { login: setCookies } = useAuth();
@@ -48,6 +48,7 @@ const Login = () => {
 
     return (
         <Template
+            styles={styles} // to fix weird bug
             type="login"
             authError={authError}
             form={

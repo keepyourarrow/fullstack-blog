@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Editor as MCEEditor } from "@tinymce/tinymce-react";
 
 const Editor = ({ height, initVal, type, onChange }) => {
@@ -24,8 +24,8 @@ const Editor = ({ height, initVal, type, onChange }) => {
                 ],
                 toolbar:
                     "undo redo | bold italic image link| formatSelect | \
-alignleft aligncenter alignright alignjustify | \
-bullist numlist outdent indent | removeformat | help",
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat | help",
 
                 help_tabs: ["shortcuts", "keyboardnav"],
                 branding: false,
