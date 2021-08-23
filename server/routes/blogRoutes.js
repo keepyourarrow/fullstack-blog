@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const blogsController = require("../controllers/blogsController");
 const { requireAuth, adminOnly } = require("../middleware/authMiddleware");
-const { putCountViews, postBlogValidator } = require("../validators/blogsValidators");
+const { putBlogValidator, postBlogValidator } = require("../validators/blogsValidators");
 
 const tempBlogs = [
     {
@@ -133,6 +133,13 @@ function filterBySearch(name) {
 router.get("/", blogsController.getAllBlogs);
 //#endregion
 
+//#region get POPULAR BLOGS
+router.get("/popular", blogsController.getPopularBlogs);
+//#endregion
+//#region get POPULAR BLOGS
+router.get("/related/:category/:title", blogsController.getRelatedBlogs);
+//#endregion
+
 //#region GET BLOG BY TITLE
 router.get("/:title", blogsController.getBlogByTitle);
 //#endregion
@@ -154,7 +161,9 @@ router.post("/", [requireAuth, adminOnly, postBlogValidator], blogsController.cr
 //#endregion POST
 
 //#region PUT
-router.put("/count-views", putCountViews, blogsController.count_views);
+// TODO add :title to count-views instead of sending it in a body...
+router.put("/count-views", putBlogValidator, blogsController.count_views);
+router.put("/:title", putBlogValidator, blogsController.edit_blog);
 //#endregion PUT
 
 router.get("/tags/:name", (req, res) => {

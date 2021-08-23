@@ -84,6 +84,7 @@ const getBlogByCategory = async (req, res) => {
 
     blogs.map((blog) => {
         removeUselessProperties(blog);
+        delete blog.content;
     });
 
     res.json(blogs);
@@ -124,23 +125,10 @@ const getBlogBySearch = async (req, res) => {
 
     const blogs = await prisma.blog.findMany({
         where: {
-            OR: [
-                {
-                    title: {
-                        contains: name,
-                        mode: "insensitive",
-                    },
-                },
-
-                {
-                    user: {
-                        userName: {
-                            contains: name,
-                            mode: "insensitive",
-                        },
-                    },
-                },
-            ],
+            title: {
+                contains: name,
+                mode: "insensitive",
+            },
         },
         include: includeCategoryAndUsers,
     });
@@ -151,11 +139,64 @@ const getBlogBySearch = async (req, res) => {
 
     blogs.map((blog) => {
         removeUselessProperties(blog);
+        delete blog.content;
     });
 
     res.json(blogs);
 };
 //#endregion  GET BLOGS BY SEARCH
+
+//region GET POPULAR BLOGS
+const getPopularBlogs = async (req, res) => {
+    const blogs = await prisma.blog.findMany({
+        orderBy: {
+            views: "desc",
+        },
+        take: 5,
+        include: includeCategoryAndUsers,
+    });
+
+    blogs.map((blog) => {
+        removeUselessProperties(blog);
+        delete blog.content;
+    });
+
+    res.json(blogs);
+};
+
+//#endregion
+
+//region GET POPULAR BLOGS
+const getRelatedBlogs = async (req, res) => {
+    const { category, title } = req.params;
+
+    // for the time being, in the future, make it incldue  tags as well maybe?
+    const blogs = await prisma.blog.findMany({
+        where: {
+            category: {
+                name: category,
+            },
+
+            NOT: {
+                title,
+            },
+        },
+        orderBy: {
+            views: "desc",
+        },
+        take: 3,
+        include: includeCategoryAndUsers,
+    });
+
+    for (let blog of blogs) {
+        removeUselessProperties(blog);
+        delete blog.content;
+    }
+
+    res.json(blogs);
+};
+
+//#endregion
 
 //#endregion GET
 
@@ -195,6 +236,48 @@ const count_views = async (req, res) => {
             },
         });
     }
+
+    res.sendStatus(200);
+};
+
+const edit_blog = async (req, res) => {
+    const { title } = req.params;
+    const { title: updatedTitle, image, content, short_preview, preview, category } = req.body;
+
+    const errors = checkValidatorError(req, res);
+    if (errors && errors.length > 0) {
+        return res.status(500).json({ errors });
+    }
+
+    let blog = await prisma.blog.findFirst({
+        where: { title },
+    });
+
+    if (!blog) {
+        return notFoundError(res, "blog with this title was not found");
+    }
+
+    await prisma.blog.update({
+        where: { title },
+        data: {
+            title: updatedTitle,
+            image,
+            content,
+            short_preview,
+            preview,
+            edited: true,
+            category: {
+                connectOrCreate: {
+                    create: {
+                        name: category,
+                    },
+                    where: {
+                        name: category,
+                    },
+                },
+            },
+        },
+    });
 
     res.sendStatus(200);
 };
@@ -256,10 +339,13 @@ module.exports = {
     getBlogByCategory,
     getBlogByAuthor,
     getBlogBySearch,
+    getPopularBlogs,
+    getRelatedBlogs,
 
     //post
     create_blog,
 
     //put
     count_views,
+    edit_blog,
 };

@@ -36,6 +36,7 @@ export const useNormalFetch = ({
                 cookie.set("access_token", data.access_token, { expires: 365 });
                 delete data.access_token;
             }
+            
             console.log(data, "useNORMALFETCH");
             setRes(data);
             setLoading(false);

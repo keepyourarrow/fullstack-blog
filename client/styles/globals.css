@@ -10,6 +10,7 @@
     --color-black-3: #1a202c;
     --color-gray-1: #edf2f7;
     --color-gray-2: rgba(100, 95, 95, 0.75);
+    --color-gray-3: #d6d6d6;
     --color-indigo-1: #e1d5ea;
     --color-pink-1: #bb3d6e;
     --color-pink-2: #d03b39;
@@ -22,6 +23,7 @@
     --color-green-2: #90ff99;
     --color-blue-1: #007fff;
     --transition-1: all 0.45s cubic-bezier(0.4, 0, 0, 1);
+    --transition-2: all 0.65s cubic-bezier(0.4, 0, 0, 1);
     --transition-main: all 0.2s ease-in-out;
 }
 
@@ -509,6 +511,11 @@ p {
     align-items: center;
     justify-content: center;
 }
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .max-w-50 {
     max-width: 50%;
@@ -559,6 +566,10 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
+.capitalize {
+    text-transform: capitalize;
+    letter-spacing: 0.1em;
+}
 .bold {
     font-weight: bold;
 }
@@ -590,6 +601,12 @@ p {
 }
 .mt-1 {
     margin-top: 0.25rem;
+}
+.ml-1 {
+    margin-left: 0.25rem;
+}
+.ml-2 {
+    margin-left: 0.5rem;
 }
 /*------------------------------------*\
   #links
@@ -721,9 +738,35 @@ p {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.stylish-btn {
+    display: inline-block;
+    cursor: pointer;
+    padding: 1.25rem 2.5rem;
+    clear: both;
+    border: 1px solid #e13d3d;
+    background: #fff;
+    font-size: 18px;
+    color: var(--color-pink-2);
+    text-transform: lowercase;
+    transition: var(--transition-main);
+}
+.stylish-btn:hover {
+    background: var(--color-pink-2);
+    color: white;
+}
 /*------------------------------------*\
   #end-buttons
 \*------------------------------------*/
+
+.secondary-title {
+    padding-bottom: 0;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-style: italic;
+}
+
 .divider {
     width: 50%;
     max-width: 500px;
@@ -792,6 +835,9 @@ input:disabled {
     font: bold 15px Helvetica, sans-serif;
 }
 
+.border__top {
+    border-top: 1px solid var(--color-gray-3);
+}
 /* end form */
 
 /* tooltips */

@@ -1,16 +1,11 @@
 import Head from "next/head";
 import { Home } from "../Components/Home/Home";
-import DefaultLayout from "../Components/Layout/DefaultLayout";
 
 export default function HomePage({ blogs, notFound }) {
     if (blogs.length === 0) {
         return <div>NOt found</div>;
     }
-    return (
-        <div>
-            <Home blogs={blogs} />
-        </div>
-    );
+    return <Home blogs={blogs} />;
 }
 
 export async function getStaticProps(context) {

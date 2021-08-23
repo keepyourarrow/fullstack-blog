@@ -1,9 +1,9 @@
 import React from "react";
-import DisplaySingleBlog from "../Common/DisplaySingleBlog";
+import DisplaySingleBlog from "../Common/SingleBlog/DisplaySingleBlog";
 
 export const Home = ({ blogs }) => {
     return (
-        <section className="blog-section">
+        <>
             {blogs.map((blog) => {
                 const {
                     id,
@@ -27,6 +27,6 @@ export const Home = ({ blogs }) => {
                     />
                 );
             })}
-        </section>
+        </>
     );
 };

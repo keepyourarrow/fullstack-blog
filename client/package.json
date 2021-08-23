@@ -8,12 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@n8tb1t/use-scroll-position": "^2.0.3",
     "@tinymce/tinymce-react": "^3.10.3",
     "axios": "^0.21.1",
     "framer-motion": "^3.6.2",
     "html-escaper": "^3.0.3",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.1",
     "next": "10.0.5",
     "react": "17.0.1",
     "react-content-loader": "^6.0.2",

@@ -4,7 +4,7 @@ import { useNormalFetch } from "../../hooks/useNormalFetch";
 import { useValidateImageURL } from "use-validate-image-url";
 
 import Editor from "../Common/Editor";
-import DisplaySingleBlog from "../Common/DisplaySingleBlog";
+import DisplaySingleBlog from "../Common/SingleBlog/DisplaySingleBlog";
 
 import styles from "./admin.module.css";
 import { motion, AnimatePresence } from "framer-motion";

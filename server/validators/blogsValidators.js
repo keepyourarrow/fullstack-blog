@@ -8,9 +8,9 @@ const postBlogValidator = [
     getValidation("category", "string"),
 ];
 
-const putCountViews = [getValidation("title", "string")];
+const putBlogValidator = [getValidation("title", "string")];
 
 module.exports = {
     postBlogValidator,
-    putCountViews,
+    putBlogValidator,
 };
