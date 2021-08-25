@@ -6,6 +6,8 @@ const getValidation = (val, type) => {
     } else if (type === "email") {
         // console.log(check(val).normalizeEmail().isEmail());
         return check(val).normalizeEmail().isEmail();
+    } else if (type == "boolean") {
+        return check(val).isBoolean();
     }
 
     //int

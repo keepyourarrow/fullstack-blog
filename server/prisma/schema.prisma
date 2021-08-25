@@ -57,15 +57,22 @@ model Blog {
 //one to many relationship with blog and user
 model Comment {
   id       String @id @default(cuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+
   body     String
   likes    Int?   @default(0)
   dislikes Int?   @default(0)
+  name     String?
+  email    String?
+  notify   Boolean  @default(false) //notify that someone replied
 
   //relational fields
-  blog    Blog   @relation(fields: [blog_id], references: [id])
   blog_id String
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id Int
+  blog    Blog   @relation(fields: [blog_id], references: [id])
+  user_id Int?
+  user    User?   @relation(fields: [user_id], references: [id])
 
 
   @@map(name: "comments")

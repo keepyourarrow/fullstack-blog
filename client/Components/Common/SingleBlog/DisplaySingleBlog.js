@@ -180,7 +180,7 @@ const DisplaySingleBlog = ({ blog = {}, author, created_at, comments, type }) =>
             </article>
 
             {scrolled && <RelatedBlogs category={category} title={title} />}
-            {singleBlog && <Comments title={title} scrolled={scrolled} />}
+            {singleBlog && <Comments title={title} scrolled={scrolled} blog_id={blog.id} />}
         </>
     );
 };

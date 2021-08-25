@@ -7,6 +7,8 @@ export const fetchWithAuth = (params, type, body) => {
     const access_token = cookie.get("access_token");
     body.refresh_token = cookie.get("refresh_token");
 
+    console.log({ params, type, body, access_token });
+
     let config = {
         headers: {
             Authorization: access_token,

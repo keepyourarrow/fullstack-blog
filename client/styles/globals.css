@@ -951,3 +951,10 @@ input:disabled {
         padding: 0 6rem;
     }
 }
+
+.font-14-5 {
+    font-size: 14.5px;
+}
+.font-18 {
+    font-size: 18px;
+}

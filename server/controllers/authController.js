@@ -111,9 +111,10 @@ const login = async (req, res) => {
         });
         // }
 
+        console.log({ refresh_token, access_token }, "authController login");
         res.json({ refresh_token, access_token });
     } catch (err) {
-        console.log(err);
+        console.log("authController login error", err);
         res.status(400).json({ err: err.message });
     }
     // const user = await User.find

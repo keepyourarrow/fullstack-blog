@@ -265,8 +265,6 @@
 .comment__name {
     color: var(--color-black-2);
     opacity: 0.85;
-    font-size: 14.5px;
-    text-transform: uppercase;
     font-weight: 700;
 }
 
@@ -283,6 +281,10 @@
 .comment__reply {
     display: inline-block;
     font-size: 13px;
+}
+.comment__replyContainer {
+    margin-top: 2.75rem;
+    padding-left: 6rem;
 }
 
 /* end comments */

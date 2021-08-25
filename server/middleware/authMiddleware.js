@@ -3,63 +3,12 @@ const { prisma } = require("../lib/prisma.js");
 
 const { createAccessToken } = require("../utils/createTokens");
 
-const requireAuth2 = async (req, res, next) => {
-    const accessToken = req.cookies.accessToken;
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken && !accessToken) {
-        return next();
-    }
-
-    try {
-        const data = verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-        req.userId = data.userId;
-        console.log(data);
-        return next();
-    } catch {
-        console.log("we are here", req);
-    }
-
-    if (!refreshToken) {
-        return next();
-    }
-
-    let data;
-
-    try {
-        data = verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-    } catch {
-        return next();
-    }
-
-    // const user = await User.findOne(data.userId);
-
-    //token has been invalidated
-    if (!user || user.count !== data.count) {
-        return next();
-    }
-
-    // if all is good
-    const tokens = createTokens({ userId: user._id, userName: user.username, count: user.count });
-    res.cookie("accessToken", tokens.accessToken, {
-        httpOnly: true,
-        secure: false, // set to true if your using https
-    });
-
-    res.cookie("refreshToken", tokens.refreshToken, {
-        httpOnly: true,
-        secure: false, // set to true if your using https
-    });
-    req.userId = user._id;
-    console.log("we are here", req.userId);
-
-    next();
-};
 
 // authenticate token
 const requireAuth = async (req, res, next) => {
     let access_token = req.headers["authorization"];
     const refresh_token = req.body.refresh_token;
-    console.log({ access_token, refresh_token });
+    console.log({ access_token, refresh_token }, "requireAuth");
 
     // if token not found
     if (!access_token || !refresh_token) {
@@ -138,5 +87,4 @@ const adminOnly = async (req, res, next) => {
 module.exports = {
     requireAuth,
     adminOnly,
-    requireAuth2,
 };
